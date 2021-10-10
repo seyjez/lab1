@@ -1,14 +1,16 @@
-// Copyright 2021 wm8
+#define HEADER_HPP_
+#ifdef HEADER_HPP_
 
-#ifndef INCLUDE_HEADER_HPP_
-#define INCLUDE_HEADER_HPP_
+
 #include <string>
 #include <any>
-#include <nlohmann/json.hpp>
 #include <iostream>
 #include <fstream>
+#include <nlohmann/json.hpp>
+
 
 using nlohmann::json;
 
-json getJSON(int argc, char** argv);
-#endif // INCLUDE_HEADER_HPP_
+json takeJson(int argc, char** argv);
+
+#endif // HEADER_HPP_

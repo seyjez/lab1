@@ -1,15 +1,27 @@
-// Copyright 2021 wm8
-#ifndef INCLUDE_TEST_CPP_
-#define INCLUDE_TEST_CPP_
+#define TEST_CPP_
+#ifdef TEST_CPP_
+
 
 #include <gtest/gtest.h>
 #include "header.hpp"
 #include <Student.hpp>
-#ifdef _JSON_DIR
-#define JSON_DIR _JSON_DIR
-#else
+
+
+#ifndef _JSON_DIR
 #define JSON_DIR "nobody"
+#else
+#define JSON_DIR _JSON_DIR
 #endif
+
+
+TEST(printTest, StudentItem)
+{
+  std::stringstream ss;
+  Student s("test", (std::string)"test", (size_t)3, std::vector<std::string>());
+  print(s, ss);
+  ASSERT_EQ("| test                | test      | 3         | 0         |\n"
+      "|---------------------|-----------|-----------|-----------|\n",  ss.str());
+}
 TEST(printTest, StudentsArray) {
     std::stringstream ss;
     std::vector<Student> students;
@@ -25,29 +37,21 @@ TEST(printTest, StudentsArray) {
         "| test                | 4         | 3.33      | 0         |\n"
         "|---------------------|-----------|-----------|-----------|\n",  ss.str());
 }
-TEST(printTest, StudentItem)
-{
-  std::stringstream ss;
-  Student s("test", (std::string)"test", (size_t)3, std::vector<std::string>());
-  print(s, ss);
-  ASSERT_EQ("| test                | test      | 3         | 0         |\n"
-      "|---------------------|-----------|-----------|-----------|\n",  ss.str());
-}
 TEST(printTest, json)
 {
   std::string jsonData = "{\n"
       "  \"items\": [\n"
       "    {\n"
-      "      \"name\": \"Gusov Petr\",\n"
-      "      \"group\": \"UI9-11\",\n"
-      "      \"avg\": \"4.25\",\n"
+      "      \"name\": \"Akakiy Akaki\",\n"
+      "      \"group\": \"UI8-32\",\n"
+      "      \"avg\": \"5.25\",\n"
       "      \"debt\": null\n"
       "    },\n"
       "    {\n"
-      "      \"name\": \"Zhdanov Ivan\",\n"
-      "      \"group\": 31,\n"
-      "      \"avg\": 2.25,\n"
-      "      \"debt\": \"pyhton\"\n"
+      "      \"name\": \"Ded Asambler\",\n"
+      "      \"group\": 32,\n"
+      "      \"avg\": 3.75,\n"
+      "      \"debt\": \"asembler\"\n"
       "    }\n"
       "  ],\n"
       "  \"_meta\": {\n"
@@ -55,14 +59,14 @@ TEST(printTest, json)
       "  }\n"
       "}";
   nlohmann::json _json = json::parse(jsonData);
-  std::vector<Student> students_parsed = parseJSON(_json);
+  std::vector<Student> students_parsed = parsingJson(_json);
   std::stringstream ss;
   print(students_parsed, ss);
   ASSERT_EQ("| name                | group     | avg       | debt      |\n"
       "|---------------------|-----------|-----------|-----------|\n"
-      "| Gusov Petr          | UI9-11    | 4.25      | null      |\n"
+      "| Akakiy Akaki        | UI8-32    | 5.25      | null      |\n"
       "|---------------------|-----------|-----------|-----------|\n"
-      "| Zhdanov Ivan        | 31        | 2.25      | pyhton    |\n"
+      "| Ded Asambler        | 32        | 3.75      | asembler  |\n"
       "|---------------------|-----------|-----------|-----------|\n", ss.str());
 }
 
@@ -71,16 +75,16 @@ TEST(parseTest, jsonParse)
   std::string jsonData = "{\n"
       "  \"items\": [\n"
       "    {\n"
-      "      \"name\": \"Gusov Petr\",\n"
-      "      \"group\": \"UI9-11\",\n"
-      "      \"avg\": \"4.25\",\n"
+      "      \"name\": \"Akakiy Akaki\",\n"
+      "      \"group\": \"UI8-32\",\n"
+      "      \"avg\": \"5.25\",\n"
       "      \"debt\": null\n"
       "    },\n"
       "    {\n"
-      "      \"name\": \"Zhdanov Ivan\",\n"
-      "      \"group\": 31,\n"
-      "      \"avg\": 2.25,\n"
-      "      \"debt\": \"pyhton\"\n"
+      "      \"name\": \"Ded Asambler\",\n"
+      "      \"group\": 32,\n"
+      "      \"avg\": 3.75,\n"
+      "      \"debt\": \"asembler\"\n"
       "    }\n"
       "  ],\n"
       "  \"_meta\": {\n"
@@ -88,12 +92,12 @@ TEST(parseTest, jsonParse)
       "  }\n"
       "}";
     nlohmann::json _json = json::parse(jsonData);
-    std::vector<Student> students_parsed = parseJSON(_json);
+    std::vector<Student> students_parsed = parsingJson(_json);
     std::vector<Student> student_inited = {
-        Student("Gusov Petr", (std::string)"UI9-11",
-                (std::string)"4.25", nullptr),
-        Student("Zhdanov Ivan", (size_t)31,
-                (double)2.25, (std::string)"pyhton")
+        Student("Akakiy Akaki", (std::string)"UI8-32",
+                (std::string)"5.25", nullptr),
+        Student("Ded Asambler", (size_t)32,
+                (double)3.75, (std::string)"asembler")
     };
     ASSERT_EQ(student_inited, students_parsed);
 }
@@ -102,20 +106,20 @@ TEST(parseTest, fromFile)
   std::string jsonData = "{\n"
       "  \"items\": [\n"
       "    {\n"
-      "      \"name\": \"Gusov Petr\",\n"
-      "      \"group\": \"1\",\n"
-      "      \"avg\": \"4.25\",\n"
+      "      \"name\": \"Akakiy Akaki\",\n"
+      "      \"group\": \"2\",\n"
+      "      \"avg\": \"5.25\",\n"
       "      \"debt\":  [\n"
+      "        \"Java\",\n"
       "        \"C++\",\n"
-      "        \"Linux\",\n"
-      "        \"Network\"\n"
+      "        \"Games\"\n"
       "      ]\n"
       "    },\n"
       "    {\n"
-      "      \"name\": \"Zdhanov Ivan\",\n"
-      "      \"group\": 31,\n"
-      "      \"avg\": 2.25,\n"
-      "      \"debt\": \"python\"\n"
+      "      \"name\": \"Ded Asembler\",\n"
+      "      \"group\": 32,\n"
+      "      \"avg\": 3.75,\n"
+      "      \"debt\": \"asembler\"\n"
       "    }\n"
       "  ],\n"
       "  \"_meta\": {\n"
@@ -124,18 +128,19 @@ TEST(parseTest, fromFile)
       "}";
   nlohmann::json json1 = json::parse(jsonData);
   std::string path = JSON_DIR;
-  path+="/example1.json";
+  path+="/test1.json";
   char* argv[] ={(char*)"", (char*)(path.c_str())};
-  nlohmann::json json2 = getJSON(2, argv);
+  nlohmann::json json2 = takeJson(2, argv);
   ASSERT_EQ(json1, json2) << "Test passed!";
 }
+
 TEST(errorCheck, lessArgsTest)
 {
   try {
     std::string path = JSON_DIR;
-    path+="/example1.json";
+    path+="/test1.json";
     char* argv[] ={(char*)"", (char*)(path.c_str())};
-    nlohmann::json json2 = getJSON(1, argv);
+    nlohmann::json json2 = takeJson(1, argv);
     FAIL() << "Expected: The file path was not passed";
   }
   catch(std::runtime_error const & err) {
@@ -145,13 +150,14 @@ TEST(errorCheck, lessArgsTest)
     FAIL() << "Expected The file path was not passed";
   }
 }
+
 TEST(errorCheck, _metaCheck)
 {
   try {
     std::string path = JSON_DIR;
-    path+="/example2.json";
+    path+="/test2.json";
     char* argv[] ={(char*)"", (char*)(path.c_str())};
-    nlohmann::json json2 = getJSON(2, argv);
+    nlohmann::json json2 = takeJson(2, argv);
     FAIL() << "Expected: _meta value does not match the array size";
   }
   catch(std::runtime_error const & err) {
@@ -161,4 +167,4 @@ TEST(errorCheck, _metaCheck)
     FAIL() << "Expected: _meta value does not match the array size";
   }
 }
-#endif // INCLUDE_TEST_CPP_
+#endif // TEST_CPP_
