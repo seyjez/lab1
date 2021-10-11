@@ -1,7 +1,7 @@
 //Copyright 2021 Enigma
 
+#ifndef STUDENT_HPP_
 #define STUDENT_HPP_
-#ifdef STUDENT_HPP_
 
 #include "header.hpp"
 #include <vector>
