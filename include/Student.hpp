@@ -1,7 +1,7 @@
 //Copyright 2021 Enigma
 
-#ifndef STUDENT_HPP_
-#define STUDENT_HPP_
+#ifndef INCLUDE_STUDENT_HPP_
+#define INCLUDE_STUDENT_HPP_
 
 #include "header.hpp"
 #include <vector>
@@ -34,4 +34,4 @@ void from_json(const json& j, Student& s);
 
 
 std::vector<Student> parsingJson(json& data);
-#endif  // STUDENT_HPP_
+#endif  //INCLUDE_STUDENT_HPP_

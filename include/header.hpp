@@ -1,8 +1,7 @@
 //Copyright 2021 Enigma
 
-#define HEADER_HPP_
-#ifdef HEADER_HPP_
-
+#ifndef INCLUDE_HEADER_HPP_
+#define INCLUDE_HEADER_HPP_
 
 #include <string>
 #include <any>
@@ -15,4 +14,4 @@ using nlohmann::json;
 
 json takeJson(int argc, char** argv);
 
-#endif // HEADER_HPP_
+#endif // INCLUDE_HEADER_HPP_
