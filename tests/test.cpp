@@ -1,3 +1,5 @@
+//Copyright 2021 Enigma
+
 #define TEST_CPP_
 #ifdef TEST_CPP_
 

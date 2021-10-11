@@ -1,3 +1,5 @@
+//Copyright 2021 Enigma
+
 #include <header.hpp>
 #include "Student.hpp"
 

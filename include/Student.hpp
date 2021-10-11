@@ -1,3 +1,5 @@
+//Copyright 2021 Enigma
+
 #define STUDENT_HPP_
 #ifdef STUDENT_HPP_
 

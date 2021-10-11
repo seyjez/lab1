@@ -1,3 +1,5 @@
+// Copyright 2021 Enigma
+
 #include "Student.hpp"
 #include <iomanip>
 #include <utility>

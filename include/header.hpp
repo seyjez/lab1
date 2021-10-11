@@ -1,3 +1,5 @@
+//Copyright 2021 Enigma
+
 #define HEADER_HPP_
 #ifdef HEADER_HPP_
 
