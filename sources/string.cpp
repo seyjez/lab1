@@ -49,6 +49,7 @@ void print(Student& student, std::ostream& os)
         toString(student.debt), os);
 }
 
+
 void print(std::vector<Student>& students, std::ostream& os)
 {
   print("name", "group", "avg", "debt", os);

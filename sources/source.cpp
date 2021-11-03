@@ -1,6 +1,8 @@
 //Copyright 2021 Enigma
+
 #include <header.hpp>
 #include "Student.hpp"
+
 json takeJson(int argc, char** argv) {
   if (argc < 2) throw std::runtime_error{"The file path was not passed"};
   std::string filePath(argv[1]);

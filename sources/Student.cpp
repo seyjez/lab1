@@ -43,6 +43,7 @@ Student::Student() = default;
 auto get_name(const json& j) -> std::string {
   return j.get<std::string>();
 }
+
 auto get_debt(const json& j) -> std::any {
   if (j.is_null())
     return nullptr;
