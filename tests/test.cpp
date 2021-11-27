@@ -1,4 +1,4 @@
-//Copyright 2021 Enigma
+//Copyright 2021 Tidash
 
 #define TEST_CPP_
 #ifdef TEST_CPP_
